@@ -16,7 +16,10 @@ let gulp = require('gulp'),
   pngquant = require('imagemin-pngquant'),
   webp = require('gulp-webp'),
   babel = require("gulp-babel"),
-  sourcemaps = require("gulp-sourcemaps");
+  sourcemaps = require("gulp-sourcemaps"),
+  gulpStylelint = require("gulp-stylelint");
+
+ 
 
 
 gulp.task('sass', function () {
@@ -111,6 +114,18 @@ gulp.task('js', function () {
     .pipe(browserSync.reload({ stream: true }))
 });
 
+gulp.task('lintCss', function lintCssTask() {
+  return gulp
+    .src('src/**/*.scss')
+    .pipe(gulpStylelint(
+      {
+      reporters: [
+        {formatter: 'string', 
+        console: true}
+      ]
+    }));
+});
+
 gulp.task('browser-sync', function () {
   browserSync.init({
     server: {
@@ -142,7 +157,7 @@ gulp.task('images', function () {
             loops: 4, //количество прогонок изображения
             min: 50, //минимальное качество в процентах
             max: 95, //максимальное качество в процентах
-            quality: 'high', 
+            quality: 'high',
             use: [pngquant()],
           }),
           imagemin.gifsicle(), //тут и ниже всякие плагины для обработки разных типов изображений
@@ -178,12 +193,11 @@ gulp.task("webp", function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch('src/scss/**/*.scss', gulp.parallel('sass'))
+  gulp.watch('src/scss/**/*.scss', gulp.parallel('sass', 'lintCss'))
   gulp.watch(['src/*.html', 'src/components/**/*.html'], gulp.parallel('html'))
   gulp.watch('src/js/*js', gulp.parallel('js', 'minjs'))
   gulp.watch('src/fonts/**/*.ttf', gulp.parallel('ttf2woff2', 'ttf2woff'))
   gulp.watch('src/images/**/*.+(png|jpg|jpeg|gif|svg|ico|webp)', gulp.parallel('images'));
-
 })
 
 gulp.task('default', gulp.parallel('sass', 'style', 'minjs', 'script', 'watch', 'browser-sync', 'ttf2woff2', 'ttf2woff', 'images'))
