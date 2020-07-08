@@ -11,6 +11,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
+    "animate.css": "^4.1.0",
     "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
@@ -32,6 +33,7 @@
     "imagemin-jpeg-recompress": "^7.0.0",
     "imagemin-pngquant": "^9.0.0",
     "jquery-form-styler": "^2.0.2",
+    "magnific-popup": "^1.1.0",
     "normalize.css": "^8.0.1",
     "slick-carousel": "^1.8.1",
     "stylelint": "^13.6.1",
