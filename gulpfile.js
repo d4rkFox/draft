@@ -14,13 +14,11 @@ let gulp = require('gulp'),
   imagemin = require('gulp-imagemin'),
   recompress = require('imagemin-jpeg-recompress'),
   pngquant = require('imagemin-pngquant'),
+  del = require('del'),
   webp = require('gulp-webp'),
   babel = require("gulp-babel"),
   sourcemaps = require("gulp-sourcemaps"),
   gulpStylelint = require("gulp-stylelint");
-
- 
-
 
 gulp.task('sass', function () {
   return gulp
@@ -63,7 +61,10 @@ gulp.task('style', function () {
     'node_modules/jquery-form-styler/dist/jquery.formstyler.css',
     'node_modules/animate.css/animate.css',
     'node_modules/magnific-popup/dist/magnific-popup.css',
-    'node_modules/slick-carousel/slick/slick.css'
+    'node_modules/slick-carousel/slick/slick.css',
+    'node_modules/aos/dist/aos.css',
+    'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.css'
+
   ])
     .pipe(concat('libs.min.css'))
     .pipe(cssmin())
@@ -91,7 +92,9 @@ gulp.task('script', function () {
     'node_modules/slick-carousel/slick/slick.js',
     'node_modules/jquery-form-styler/dist/jquery.formstyler.js',
     'node_modules/magnific-popup/dist/jquery.magnific-popup.js',
-    'node_modules/slick-carousel/slick/slick.js'
+    'node_modules/slick-carousel/slick/slick.js',
+    'node_modules/aos/dist/aos.js',
+    'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.js'
   ])
     .pipe(size())
     .pipe(babel())
@@ -112,6 +115,16 @@ gulp.task('html', function () {
     )
     .pipe(gulp.dest("app/"))
     .pipe(browserSync.reload({ stream: true }))
+});
+
+gulp.task("deletefonts", function () {
+	
+	return del.sync("app/fonts/**/*.*");
+});
+
+gulp.task("deleteimg", function () {
+
+	return del.sync("app/images/**/*.*");
 });
 
 gulp.task('js', function () {

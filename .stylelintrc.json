@@ -14,7 +14,7 @@
                 "ignoreFontFamilies": ["icomoon"]
             }
         ],
-        "color-hex-case": "upper",
+        "color-hex-case": "lower",
         "at-rule-empty-line-before": [
             "always",
             {
