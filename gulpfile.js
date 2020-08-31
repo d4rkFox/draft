@@ -87,7 +87,6 @@ gulp.task('script', function () {
     'node_modules/aos/dist/aos.js',
     'node_modules/@fancyapps/fancybox/dist/jquery.fancybox.js',
     'node_modules/swiper/swiper-bundle.js',
-    'node_modules/isotope-layout/dist/isotope.pkgd.js',
     'node_modules/focus-visible/dist/focus-visible.js'
     
   ])
